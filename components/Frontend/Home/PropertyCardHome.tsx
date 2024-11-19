@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Bath, BedDouble, Home } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface PropertyCardProps {
   id: string;
@@ -35,7 +36,9 @@ const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) =
       <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
         {/* Image Container */}
         <div className="relative">
-          <img
+          <Image
+          height={500}
+          width={500}
             src={property.image}
             alt={property.title}
             className="w-full h-[250px] object-cover"

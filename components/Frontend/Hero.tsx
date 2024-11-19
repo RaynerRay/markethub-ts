@@ -1,23 +1,21 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getCategories } from '@/actions/categories';
 import { getSubCategories } from '@/actions/subCategories';
 import { getCities } from '@/actions/cities';
-import { getProperties } from '@/actions/properties';
 import { getAllTowns } from '@/actions/towns';
 import SearchFilter from './SearchFilter';
+import Image from 'next/image';
 
 const Hero = async () => {
-  const [propertiesRes, categoriesRes, subcategoriesRes, citiesRes, townsRes] = 
+  const [categoriesRes, subcategoriesRes, citiesRes, townsRes] = 
     await Promise.all([
-      getProperties({}),
       getCategories(),
       getSubCategories(),
       getCities(),
       getAllTowns(),
     ]);
 
-  const properties = propertiesRes || [];
   const categories = categoriesRes.data || [];
   const subcategories = subcategoriesRes.data || [];
   const cities = citiesRes.data || [];
@@ -45,7 +43,9 @@ const Hero = async () => {
 
           {/* Right Image */}
           <div className="order-2 md:order-2 h-[300px] sm:h-[400px] md:h-[500px] ">
-            <img 
+            <Image
+            height={500}
+            width={500} 
               src="/house1.jpg"
               alt="Modern house with pool" 
               className="rounded-lg  w-full h-full"

@@ -1,18 +1,20 @@
 import * as React from "react";
-
 import { MultiSelect } from "react-multi-select-component";
+
 type SelectInputProps = {
   label: string;
   optionTitle: string;
   className?: string;
   options: SelectOption[];
-  selectedOption: any;
-  setSelectedOption: any;
+  selectedOption: SelectOption[]; // Array of SelectOption
+  setSelectedOption: (options: SelectOption[]) => void; // Function to update selected options
 };
+
 export type SelectOption = {
   value: string;
   label: string;
 };
+
 export default function CustomMultiSelect({
   label,
   className = "sm:col-span-2",

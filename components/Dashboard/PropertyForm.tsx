@@ -19,19 +19,20 @@ import TextInput from "../FormInputs/TextInput";
 import ImageInput from "../FormInputs/ImageInput";
 import SubmitButton from "../FormInputs/SubmitButton";
 import {
-  PropertyProps,
+  // PropertyProps,
   createProperty,
-  updateProperty,
+  // updateProperty,
 } from "@/actions/properties";
 import generateSlug from "@/utils/generateSlug";
 import { ListingType } from "@prisma/client";
-import { TextAreaInput } from "../FormInputs/TextAreaInput";
+// import { TextAreaInput } from "../FormInputs/TextAreaInput";
 import MultipleImageInput from "../FormInputs/MultipleImageInput";
 import { generateUniqueCode } from "@/lib/generateUniqueCode";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 import TagsInput from "../FormInputs/TagsInput";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
+import Image from "next/image";
 
 const modules = {
   toolbar: [
@@ -231,9 +232,9 @@ export default function PropertyForm({
     }
   }
 
-  const handleImageUpload = (url: string) => {
-    setPropertyImages((prev) => [...prev, url]);
-  };
+  // const handleImageUpload = (url: string) => {
+  //   setPropertyImages((prev) => [...prev, url]);
+  // };
 
   const removeImage = (index: number) => {
     setPropertyImages((prev) => prev.filter((_, i) => i !== index));
@@ -350,7 +351,7 @@ export default function PropertyForm({
               </Select>
             </div>
           </div>
-          // {/* Categories */}
+           {/* Categories */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="grid gap-2">
               <label htmlFor="categoryId" className="text-sm font-medium">
@@ -468,7 +469,7 @@ export default function PropertyForm({
               placeholder="Number of bathrooms"
             />
           </div>
-          // {/* Location Details */}
+           {/* Location Details */}
           <div className="grid md:grid-cols-3 gap-6">
             <TextInput
               label="Address"
@@ -511,7 +512,7 @@ export default function PropertyForm({
                 />
               </div>
             </div>
-            //
+            
             <TextInput
               label="Contact Information"
               register={register}
@@ -545,10 +546,12 @@ export default function PropertyForm({
               <div className="grid grid-cols-2 gap-2">
                 {propertyImages.map((img, index) => (
                   <div key={index} className="relative">
-                    <img
+                    <Image
                       src={img}
                       alt={`Property ${index + 1}`}
                       className="w-full h-32 object-cover rounded-md"
+                      height={500}
+                      width={500}
                     />
                     <button
                       type="button"

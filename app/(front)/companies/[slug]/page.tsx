@@ -1,9 +1,16 @@
 import CompanyDetail from "@/components/Frontend/Company/CompanyDetail";
 import { getCompanyBySlug } from "@/actions/companies";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
-  const company = await getCompanyBySlug(slug);
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function Page({ params }: PageProps) {
+  // Explicitly await params if needed
+  const awaitedParams = await Promise.resolve(params);
+  const company = await getCompanyBySlug(awaitedParams.slug);
 
   return (
     <>

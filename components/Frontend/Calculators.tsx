@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion, AccordionItem} from "@/components/ui/accordion";
 import BondCalculator from './BondCalculator';
 
 interface CostsBreakdown {
@@ -30,7 +30,8 @@ const Calculators: React.FC = () => {
   const [netIncome, setNetIncome] = useState<string>("");
   const [monthlyExpenses, setMonthlyExpenses] = useState<string>("");
   const [interestRate, setInterestRate] = useState<number>(14);
-  const [loanTerm, setLoanTerm] = useState<number>(20);
+ // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const [loanTerm, setLoanTerm] = useState<number>(20);
 
   const formatUSD = (amount: number): string => {
     return new Intl.NumberFormat('en-US', {

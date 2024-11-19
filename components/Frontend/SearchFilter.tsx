@@ -21,7 +21,6 @@ import {
 import {
   ListingType,
   Category,
-  SubCategory,
   City,
   Town,
   SearchFilterProps,

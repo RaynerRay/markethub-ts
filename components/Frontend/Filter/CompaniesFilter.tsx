@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 
 const CompaniesFilter = ({ companies }: { companies: { id: string; name: string; logo: string; propertiesCount: number }[] }) => {
@@ -7,7 +8,7 @@ const CompaniesFilter = ({ companies }: { companies: { id: string; name: string;
       <div className="space-y-4">
         {companies.map((company) => (
           <div key={company.id} className="flex items-center space-x-3">
-            <img src={company.logo || "/api/placeholder/40/40"} alt={company.name} className="w-10 h-10 rounded-full object-cover" />
+            <Image height={50} width={50} src={company.logo || "/api/placeholder/40/40"} alt={company.name} className="w-10 h-10 rounded-full object-cover" />
             <div>
               <h4 className="text-slate-800 font-medium">{company.name}</h4>
               <p className="text-slate-600 text-sm">{company.propertiesCount} Properties</p>

@@ -1,4 +1,3 @@
-// components/LoginForm.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -14,7 +13,7 @@ const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
-  
+
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: '',
@@ -24,7 +23,7 @@ const LoginForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -48,7 +47,8 @@ const LoginForm = () => {
         router.push(callbackUrl);
         router.refresh(); // Refresh server components to update authentication state
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('An unexpected error occurred:', error);
       setError('An unexpected error occurred');
     } finally {
       setIsLoading(false);
@@ -59,13 +59,13 @@ const LoginForm = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
-        
+
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
             {error}
           </div>
         )}
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-600">
@@ -109,8 +109,8 @@ const LoginForm = () => {
         </form>
 
         <div className="mt-6 text-center">
-          <a 
-            href="/forgot-password" 
+          <a
+            href="/forgot-password"
             className="text-sm text-emerald-500 hover:underline"
           >
             Forgot your password?
@@ -118,7 +118,7 @@ const LoginForm = () => {
         </div>
 
         <p className="text-center text-gray-600 mt-4">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <a href="/signup" className="text-emerald-500 font-medium hover:underline">
             Sign up
           </a>

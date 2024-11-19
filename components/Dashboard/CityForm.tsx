@@ -12,7 +12,7 @@ import SubmitButton from "../FormInputs/SubmitButton";
 import { Button } from "../ui/button";
 import { City } from "@prisma/client";
 import generateSlug from "@/utils/generateSlug";
-import { createCity, createManyCities, updateCity } from "@/actions/cities";
+import { createCity, updateCity } from "@/actions/cities";
 
 export type CityProps = {
   title: string;
@@ -65,19 +65,19 @@ export default function CityForm({
     }
   }
 
-  async function handleCreateMany() {
-    setIsLoading(true);
-    try {
-      await createManyCities();
-      toast.success("Cities Created Successfully");
-      router.push("/dashboard/cities");
-    } catch (error) {
-      toast.error("Something went wrong");
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  // async function handleCreateMany() {
+  //   setIsLoading(true);
+  //   try {
+  //     await createManyCities();
+  //     toast.success("Cities Created Successfully");
+  //     router.push("/dashboard/cities");
+  //   } catch (error) {
+  //     toast.error("Something went wrong");
+  //     console.error(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
 
   return (
     <div className="w-full max-w-2xl shadow-sm rounded-md m-3 border border-gray-200 mx-auto">

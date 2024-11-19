@@ -1,6 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -10,10 +11,12 @@ export default function About() {
         {/* Image with green corner design */}
         <div className="relative w-full md:w-1/2">
           <div className="absolute inset-0 w-full h-full -z-10 border-t-[60px] border-l-[60px] border-transparent border-t-green-500" />
-          <img
+          <Image
             src="/house1.jpg" // Replace with your actual image path
             alt="MarketHub"
             className="w-full h-full object-cover rounded-lg shadow-lg"
+            height={500}
+            width={500}
           />
         </div>
 

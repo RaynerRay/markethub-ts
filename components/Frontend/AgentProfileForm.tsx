@@ -28,8 +28,19 @@ interface AgentProfileInputs {
   companyId: string;
 }
 
+interface AgentProfileData {
+  id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  profileImageUrl?: string;
+  // Add other relevant fields from the agent profile
+}
+
 interface CreateAgentProfileResponse {
-  data: any;
+  data?: AgentProfileData;
   status: number;
   error: string | null;
 }

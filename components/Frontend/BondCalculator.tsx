@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ const BondCalculator: React.FC<BondCalculatorProps> = ({ className = '' }) => {
   const [totalCosts, setTotalCosts] = useState(0);
   const [minIncome, setMinIncome] = useState(0);
 
-  const calculateBond = () => {
+  const calculateBond = useCallback(() => {
     const principal = purchasePrice - deposit;
     const monthlyRate = interestRate / 100 / 12;
     const numberOfPayments = loanTerm * 12;
@@ -35,11 +35,12 @@ const BondCalculator: React.FC<BondCalculatorProps> = ({ className = '' }) => {
     setMonthlyRepayment(Math.round(monthlyPayment));
     setTotalCosts(Math.round(totalCosts));
     setMinIncome(Math.round(requiredIncome));
-  };
-
-  useEffect(() => {
-    calculateBond();
   }, [purchasePrice, deposit, interestRate, loanTerm]);
+
+  // Use useEffect with the memoized callback
+  React.useEffect(() => {
+    calculateBond();
+  }, [calculateBond]);
 
   const formatCurrency = (value: number) => {
     return `USD ${value.toLocaleString('en')}`;
@@ -143,12 +144,10 @@ const BondCalculator: React.FC<BondCalculatorProps> = ({ className = '' }) => {
             </div>
           </div>
 
-          
-
           <div className="space-y-2">
-          <Link href={"/calculators"} className="w-full bg-emerald-600 mt-4 text-sm text-white py-3 px-4 rounded-lg hover:bg-emerald-700 transition-colors">
-            Calculate Affordability Using Income
-          </Link>
+            <Link href="/calculators" className="block w-full bg-emerald-600 mt-4 text-sm text-white py-3 px-4 rounded-lg hover:bg-emerald-700 transition-colors text-center">
+              Calculate Affordability Using Income
+            </Link>
           </div>
         </div>
       </div>

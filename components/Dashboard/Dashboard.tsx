@@ -1,33 +1,32 @@
 import Link from "next/link";
-import {
-  Activity,
-  ArrowUpRight,
-  CalendarDays,
-  CreditCard,
-  DollarSign,
-  LayoutGrid,
-  Users,
-  UsersRound,
-} from "lucide-react";
+// import {
+//   Activity,
+//   ArrowUpRight,
+//   CalendarDays,
+//   CreditCard,
+//   DollarSign,
+//   LayoutGrid,
+//   Users,
+//   UsersRound,
+// } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow,
+// } from "@/components/ui/table";
 // import { getAdminAnalytics, getStats } from "@/actions/stats";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "@/lib/auth";
@@ -45,7 +44,7 @@ export default async function Dashboard() {
 //   const user = session?.user;
 //   const appointments = (await getAppointments()).data || [];
 
-  const uniquePatientsMap = new Map();
+  // const uniquePatientsMap = new Map();
 
  
 //   const patients = Array.from(uniquePatientsMap.values()) as PatientProps[];

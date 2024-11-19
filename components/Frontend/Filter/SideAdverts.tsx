@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
 import TownFilter from "./TownFilter";
 import { Town } from "@/types/types";
+import Image from "next/image";
 
 type AdvertProps = {
   topAdUrl?: string;
@@ -18,15 +18,14 @@ type AdvertProps = {
 const SideAdverts: React.FC<AdvertProps> = ({
   topAdUrl,
   middleAdUrl,
-  bottomAdUrl,
   towns,
    onTownSelect 
 }) => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleTownClick = (townId: string) => {
-    router.push(`/search?townId=${townId}`); // Navigate to filtered properties by town
-  };
+  // const handleTownClick = (townId: string) => {
+  //   router.push(`/search?townId=${townId}`); // Navigate to filtered properties by town
+  // };
 
   const handleAdClick = (url: string) => {
     if (url) {
@@ -59,7 +58,7 @@ const SideAdverts: React.FC<AdvertProps> = ({
         </CardHeader>
         {topAdUrl && (
         <div onClick={() => handleAdClick(topAdUrl)} className="cursor-pointer">
-          <img src={topAdUrl} alt="Mortgages" />
+          <Image height={500} width={500} src={topAdUrl} alt="Mortgages" />
         </div>
       )}
       </Card>

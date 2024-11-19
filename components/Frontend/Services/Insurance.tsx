@@ -6,11 +6,11 @@ interface ProcessStepProps {
   text: string;
 }
 
-interface ServiceProviderProps {
-  name: string;
-  price: string;
-  logo: string;
-}
+// interface ServiceProviderProps {
+//   name: string;
+//   price: string;
+//   logo: string;
+// }
 
 const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-4">
@@ -21,14 +21,14 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, text }) => (
   </div>
 );
 
-const ServiceProvider: React.FC<ServiceProviderProps> = ({ name, price, logo }) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-    <div className="flex items-center justify-between">
-      <img src={`/${logo}`} alt={`${name} logo`} className="h-10" />
-      <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
-    </div>
-  </div>
-);
+// const ServiceProvider: React.FC<ServiceProviderProps> = ({ name, price, logo }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+//     <div className="flex items-center justify-between">
+//       <img src={`/${logo}`} alt={`${name} logo`} className="h-10" />
+//       <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
+//     </div>
+//   </div>
+// );
 
 const Insurance: React.FC = () => {
   const processSteps = [
@@ -38,10 +38,10 @@ const Insurance: React.FC = () => {
     { icon: Home, text: "Get your home insured hassle-free" }
   ];
 
-  const providers = [
-    { name: "ZimCover Insurance", price: "Starting from $150/year", logo: "zimcover.png" },
-    { name: "SafeHome Insurance", price: "Affordable rates", logo: "safehome.png" }
-  ];
+  // const providers = [
+  //   { name: "ZimCover Insurance", price: "Starting from $150/year", logo: "zimcover.png" },
+  //   { name: "SafeHome Insurance", price: "Affordable rates", logo: "safehome.png" }
+  // ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 bg-slate-50">

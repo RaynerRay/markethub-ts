@@ -6,11 +6,11 @@ interface ProcessStepProps {
   text: string;
 }
 
-interface ServiceProviderProps {
-  name: string;
-  interestRate: string;
-  logo: string;
-}
+// interface ServiceProviderProps {
+//   name: string;
+//   interestRate: string;
+//   logo: string;
+// }
 
 const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-4">
@@ -21,15 +21,15 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, text }) => (
   </div>
 );
 
-const ServiceProvider: React.FC<ServiceProviderProps> = ({ name, interestRate, logo }) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-    <div className="flex items-center justify-between">
-      <img src={`/${logo}`} alt={`${name} logo`} className="h-10" />
-      <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
-    </div>
-    <p className="mt-2 text-slate-500">Interest rate: <span className="font-semibold text-emerald-500">{interestRate}%</span></p>
-  </div>
-);
+// const ServiceProvider: React.FC<ServiceProviderProps> = ({ name, interestRate, logo }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+//     <div className="flex items-center justify-between">
+//       <img src={`/${logo}`} alt={`${name} logo`} className="h-10" />
+//       <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
+//     </div>
+//     <p className="mt-2 text-slate-500">Interest rate: <span className="font-semibold text-emerald-500">{interestRate}%</span></p>
+//   </div>
+// );
 
 const HomeLoans: React.FC = () => {
   const processSteps = [
@@ -39,11 +39,11 @@ const HomeLoans: React.FC = () => {
     { icon: Home, text: "Own your dream home" }
   ];
 
-  const providers = [
-    { name: "CBZ Bank", interestRate: "12.5", logo: "cbz.png" },
-    { name: "Stanbic Bank", interestRate: "10.8", logo: "stanbic.png" },
-    { name: "ZB Bank", interestRate: "11.2", logo: "zb.png" }
-  ];
+  // const providers = [
+  //   { name: "CBZ Bank", interestRate: "12.5", logo: "cbz.png" },
+  //   { name: "Stanbic Bank", interestRate: "10.8", logo: "stanbic.png" },
+  //   { name: "ZB Bank", interestRate: "11.2", logo: "zb.png" }
+  // ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 bg-slate-50">

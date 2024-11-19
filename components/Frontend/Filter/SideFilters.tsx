@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
 import { SubCategory } from '@/types/types';
 import { X, SlidersHorizontal, ChevronDown } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
-type SideFiltersProps = {
+// Define strict types for the filters
+interface FilterState {
+  location?: string;
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  beds?: string;
+  baths?: string;
+  listingType?: ListingType;
+  propertySize?: string;
+  subcategory?: string[];
+}
+
+// Define listing type as a union of literal types
+type ListingType = 'RENT' | 'SALE';
+
+interface SideFiltersProps {
   subcategories: SubCategory[];
-  currentFilters: {
-    location?: string;
-    category?: string;
-    minPrice?: number;
-    maxPrice?: number;
-    beds?: string;
-    baths?: string;
-    listingType?: string;
-    propertySize?: string;
-    subcategory?: string[];
-  };
-  onFilterChange: (filters: any) => void;
+  currentFilters: FilterState;
+  onFilterChange: (filters: FilterState) => void;
   onClearFilters: () => void;
-};
+}
 
-const LISTING_TYPES = [
+const LISTING_TYPES: Array<{ value: ListingType; label: string }> = [
   { value: 'RENT', label: 'For Rent' },
   { value: 'SALE', label: 'For Sale' }
 ];
@@ -33,16 +37,16 @@ const FilterSection = ({ title, children }: { title: string; children: React.Rea
   </div>
 );
 
-// ... [PriceRangeFilter component remains the same]
+interface MobileFilterDropdownProps {
+  currentFilters: FilterState;
+  onFilterChange: (filters: FilterState) => void;
+  onClearFilters: () => void;
+}
 
-const MobileFilterDropdown = ({
+const MobileFilterDropdown: React.FC<MobileFilterDropdownProps> = ({
   currentFilters,
   onFilterChange,
   onClearFilters
-}: {
-  currentFilters: SideFiltersProps['currentFilters'];
-  onFilterChange: (filters: any) => void;
-  onClearFilters: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -98,16 +102,18 @@ const MobileFilterDropdown = ({
   );
 };
 
-const FiltersContent = ({
+interface FiltersContentProps {
+  currentFilters: FilterState;
+  onFilterChange: (filters: FilterState) => void;
+  onClearFilters: () => void;
+}
+
+const FiltersContent: React.FC<FiltersContentProps> = ({
   currentFilters,
   onFilterChange,
   onClearFilters
-}: {
-  currentFilters: SideFiltersProps['currentFilters'];
-  onFilterChange: (filters: any) => void;
-  onClearFilters: () => void;
 }) => {
-  const handleInputChange = (key: string, value: any) => {
+  const handleInputChange = <K extends keyof FilterState>(key: K, value: FilterState[K]) => {
     onFilterChange({
       ...currentFilters,
       [key]: value
@@ -145,7 +151,7 @@ const FiltersContent = ({
             >
               <option value="">Any</option>
               {[1, 2, 3, 4, 5, 6].map((num) => (
-                <option key={num} value={num}>{num}+ beds</option>
+                <option key={num} value={num.toString()}>{num}+ beds</option>
               ))}
             </select>
           </div>
@@ -158,7 +164,7 @@ const FiltersContent = ({
             >
               <option value="">Any</option>
               {[1, 2, 3, 4, 5, 6].map((num) => (
-                <option key={num} value={num}>{num}+ baths</option>
+                <option key={num} value={num.toString()}>{num}+ baths</option>
               ))}
             </select>
           </div>
@@ -176,7 +182,6 @@ const FiltersContent = ({
 };
 
 const SideFilters: React.FC<SideFiltersProps> = ({
-  subcategories,
   currentFilters = {},
   onFilterChange,
   onClearFilters

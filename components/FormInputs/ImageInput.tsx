@@ -14,9 +14,9 @@ export default function ImageInput({
 }: {
   label: string;
   imageUrl: string;
-  setImageUrl: any;
+  setImageUrl: any;// eslint-disable-line @typescript-eslint/no-explicit-any
   className?: string;
-  endpoint: any;
+  endpoint: any;// eslint-disable-line @typescript-eslint/no-explicit-any
 }) {
   return (
     <div className={className}>
@@ -48,15 +48,15 @@ export default function ImageInput({
         />
       ) : (
         <UploadDropzone
-          endpoint={`${endpoint}` as any}
-          onClientUploadComplete={(res: any) => {
+          endpoint={`${endpoint}` as any}// eslint-disable-line @typescript-eslint/no-explicit-any
+          onClientUploadComplete={(res: any) => {// eslint-disable-line @typescript-eslint/no-explicit-any
             setImageUrl(res[0].url);
             // Do something with the response
             toast.success("Image Upload complete");
             console.log("Files: ", res);
             console.log("Upload Completed");
           }}
-          onUploadError={(error: any) => {
+          onUploadError={(error: any) => {// eslint-disable-line @typescript-eslint/no-explicit-any
             toast.error("Image Upload Failed, Try Again");
             // Do something with the error.
             console.log(`ERROR! ${error.message}`, error);

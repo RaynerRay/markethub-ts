@@ -1,18 +1,28 @@
-import { getBlogBySlug } from "@/actions/blogs";
-import BlogForm from "@/components/Dashboard/BlogForm";
-import React from "react";
+// import { getBlogBySlug } from "@/actions/blogs";
+// import BlogForm from "@/components/Dashboard/BlogForm";
+// import React from "react";
 
-export default async function page({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) {
-  const blog = (await getBlogBySlug(slug))?.data;
+// export default async function page({
+//   params: { slug },
+// }: {
+//   params: { slug: string };
+// }) {
+//   const blog = (await getBlogBySlug(slug))?.data;
+//   return (
+//     <div>
+//       {blog && blog.id && (
+//         <BlogForm title="Update Blog" categories={["cat", "dog"]} />
+//       )}
+//     </div>
+//   );
+// }
+
+import React from 'react'
+
+const page = () => {
   return (
-    <div>
-      {blog && blog.id && (
-        <BlogForm title="Update Blog" categories={["cat", "dog"]} />
-      )}
-    </div>
-  );
+    <div>page</div>
+  )
 }
+
+export default page

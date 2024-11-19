@@ -2,6 +2,7 @@ import React from 'react';
 import { MapPin, Bath, BedDouble, Home } from 'lucide-react';
 import { Property } from '@/types/types';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
   const formatPrice = () => {
@@ -21,7 +22,9 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
       <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
         {/* Image Container */}
         <div className="relative">
-          <img 
+          <Image 
+          height={500}
+          width={500}
             src={property.imageUrl} 
             alt={property.title}
             className="w-full h-[250px] object-cover"

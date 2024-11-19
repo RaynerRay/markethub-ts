@@ -1,6 +1,7 @@
 import React from 'react';
 import { Home, Banknote, HandshakeIcon, LineChart, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface ServiceCardProps {
   icon: React.ElementType;
@@ -63,7 +64,7 @@ const ServicesList: React.FC = () => {
           </p>
         </div>
         <div className="flex justify-center lg:justify-end">
-          <img src="/office.jpg" alt="Home furniture illustration" className="max-w-md rounded-md" />
+          <Image height={500} width={500} src="/office.jpg" alt="Home furniture illustration" className="max-w-md rounded-md" />
         </div>
       </div>
 
@@ -85,7 +86,7 @@ const ServicesList: React.FC = () => {
         </h2>
         <div className="space-y-4 text-slate-600">
           <p>
-            Looking for trusted home services? We've partnered with top service providers to offer hassle-free solutions for all your property-related needs.
+            Looking for trusted home services? We have partnered with top service providers to offer hassle-free solutions for all your property-related needs.
           </p>
           <p>
             Skip the frustration of searching for individual companies online. Simply select the service you need, fill out our quick inquiry form, and receive up to 3 competitive quotes from verified providers.

@@ -1,16 +1,20 @@
 import React from "react";
-type SelectInputProps = {
-  label: string;
-  name: string;
-  register: any;
-  className?: string;
-  options: SelectOption[];
-  multiple?: boolean;
-};
+import { UseFormRegister, FieldValues } from "react-hook-form";
+
 export type SelectOption = {
   value: string;
   label: string;
 };
+
+type SelectInputProps = {
+  label: string;
+  name: string;
+  register: UseFormRegister<FieldValues>;
+  className?: string;
+  options: SelectOption[];
+  multiple?: boolean;
+};
+
 export default function SelectInput({
   label,
   name,
@@ -29,19 +33,17 @@ export default function SelectInput({
       </label>
       <div className="mt-2">
         <select
-          {...register(`${name}`)}
+          {...register(name)}
           id={name}
           multiple={multiple}
           name={name}
           className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
         >
-          {options.map((option, i: number) => {
-            return (
-              <option key={i} value={option.value}>
-                {option.label}
-              </option>
-            );
-          })}
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
     </div>

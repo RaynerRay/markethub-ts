@@ -7,23 +7,25 @@ export default function ArrayItemsInput({
   items = [],
   itemTitle,
 }: {
-  setItems: any;
+  setItems: (items: string[]) => void;
   items: string[];
   itemTitle: string;
 }) {
-  const [item, setItem] = useState("");
-  const [showTagForm, setShowTagForm] = useState(false);
+  const [item, setItem] = useState<string>(""); // Specify string type for state
+  const [showTagForm, setShowTagForm] = useState<boolean>(false); // Specify boolean type for state
+
   function addItem() {
     if (!item) return;
     setItems([...items, item]);
     setItem("");
   }
-  function removeItem(index: any) {
+
+  function removeItem(index: number) { // Use number for the index
     const newItems = [...items];
     newItems.splice(index, 1);
     setItems(newItems);
   }
-  // items END
+
   return (
     <div className="sm:col-span-2 col-span-full">
       {showTagForm ? (
@@ -68,18 +70,16 @@ export default function ArrayItemsInput({
         </button>
       )}
       <div className="flex flex-wrap gap-4 mt-4">
-        {items.map((item, i) => {
-          return (
-            <div
-              onClick={() => removeItem(i)}
-              key={i}
-              className="bg-slate-200 flex space-x-2 items-center dark:bg-slate-600 px-4 py-2 rounded-lg cursor-pointer dark:text-slate-300 text-slate-800"
-            >
-              <p>{item}</p>
-              <X className="w-4 h-4" />
-            </div>
-          );
-        })}
+        {items.map((item, i) => (
+          <div
+            onClick={() => removeItem(i)}
+            key={i}
+            className="bg-slate-200 flex space-x-2 items-center dark:bg-slate-600 px-4 py-2 rounded-lg cursor-pointer dark:text-slate-300 text-slate-800"
+          >
+            <p>{item}</p>
+            <X className="w-4 h-4" />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import Image from 'next/image';
 
 
 
@@ -29,10 +30,12 @@ const Navbar = ({ session }: NavbarProps ) => {
           <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-emerald-50">
             <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
               {session.user.image ? (
-                <img 
+                <Image 
                   src={session.user.image} 
                   alt="Profile" 
                   className="w-8 h-8 rounded-full"
+                  height={20}
+                  width={20}
                 />
               ) : (
                 <User className="h-4 w-4 text-emerald-500" />

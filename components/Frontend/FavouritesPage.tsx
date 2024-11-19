@@ -1,7 +1,7 @@
 // components/Frontend/FavouritesPage.tsx
 import React from 'react';
 import PropertyCard from './PropertyCard';
-import { Favourite, Property } from '@/types/types';
+import { Favourite } from '@/types/types';
 
 interface FavouritesPageProps {
   favourites: Favourite[];

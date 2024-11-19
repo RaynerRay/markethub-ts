@@ -1,6 +1,7 @@
 import { Blog } from '@/types/types';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface BlogCardProps {
   blog: Blog;
@@ -12,10 +13,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 cursor-pointer">
         {/* Blog Image */}
         {blog.imageUrl ? (
-          <img
+          <Image
             src={blog.imageUrl}
             alt={blog.title}
             className="w-full h-48 object-cover"
+            height={500}
+            width={500}
           />
         ) : (
           <div className="w-full h-48 bg-gray-200 flex items-center justify-center">

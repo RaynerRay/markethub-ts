@@ -1,20 +1,19 @@
 "use client";
 import {
   Home,
-  Package2,
   Power,
   MonitorPlay,
   User2,
   Users,
   HouseIcon,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+// import {
+//   Card,
+//   CardContent,
+//   CardDescription,
+//   CardHeader,
+//   CardTitle,
+// } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import React from "react";
@@ -23,13 +22,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import generateSlug from "@/utils/generateSlug";
+// import generateSlug from "@/utils/generateSlug";
 
 export default function Sidebar({ session }: { session: Session }) {
   const { user } = session;
   const role = user?.role || "USER"; // Default to USER if role is undefined
-  const id = user.id;
-  const slug = generateSlug(user.name ?? "");
+  // const id = user.id;
+  // const slug = generateSlug(user.name ?? "");
   const pathname = usePathname();
 
   const roles = {

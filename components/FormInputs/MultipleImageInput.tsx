@@ -1,14 +1,14 @@
 import { UploadDropzone } from "@/utils/uploadthing";
-import { Pencil, XCircle } from "lucide-react";
+import {  XCircle } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import toast from "react-hot-toast";
 type MultipleImageInputProps = {
   label: string;
   imageUrls: string[];
-  setImageUrls: any;
+  setImageUrls: any;// eslint-disable-line @typescript-eslint/no-explicit-any
   className?: string;
-  endpoint?: any;
+  endpoint?: any;// eslint-disable-line @typescript-eslint/no-explicit-any
 };
 export default function MultipleImageInput({
   label,
@@ -17,7 +17,7 @@ export default function MultipleImageInput({
   className = "col-span-full",
   endpoint = "",
 }: MultipleImageInputProps) {
-  function handleImageRemove(imageIndex: any) {
+  function handleImageRemove(imageIndex: any) {// eslint-disable-line @typescript-eslint/no-explicit-any
     const updatedImages = imageUrls.filter(
       (image, index) => index !== imageIndex
     );

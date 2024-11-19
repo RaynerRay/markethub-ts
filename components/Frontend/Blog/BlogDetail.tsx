@@ -1,4 +1,5 @@
 // components/BlogDetail.tsx
+import Image from 'next/image';
 import React from 'react';
 
 interface Blog {
@@ -19,10 +20,12 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ blog }) => {
     <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-12 mb-16 transition duration-300 transform hover:shadow-2xl">
       {/* Blog Image with Gradient Overlay */}
       <div className="relative">
-        <img
+        <Image
           src={blog.image}
           alt={blog.title}
           className="w-full h-80 object-cover"
+          height={500}
+          width={500}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-75"></div>
         <h1 className="absolute bottom-6 left-6 text-4xl font-bold text-white leading-tight drop-shadow-lg">
@@ -48,9 +51,9 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ blog }) => {
           ))}
 
           {/* Example of Blockquote for Emphasis */}
-          <blockquote className="border-l-4 border-emerald-500 pl-4 italic text-slate-600">
+          {/* <blockquote className="border-l-4 border-emerald-500 pl-4 italic text-slate-600">
             "This is a beautiful example of a blockquote for emphasis, showing off important points in the article."
-          </blockquote>
+          </blockquote> */}
 
           {/* Example List */}
           <ul className="list-disc list-inside space-y-2 text-slate-700 pl-4">

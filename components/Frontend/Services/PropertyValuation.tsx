@@ -6,11 +6,11 @@ interface ProcessStepProps {
   text: string;
 }
 
-interface ServiceProviderProps {
-  name: string;
-  price: string;
-  logo: string;
-}
+// interface ServiceProviderProps {
+//   name: string;
+//   price: string;
+//   logo: string;
+// }
 
 const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-4">
@@ -21,22 +21,22 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, text }) => (
   </div>
 );
 
-const ServiceProvider: React.FC<ServiceProviderProps> = ({ name, price, logo }) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-    <div className="flex items-center justify-between">
-      <img src={`/${logo}`} alt={`${name} logo`} className="h-10" />
-      <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
-      {/* <div className="mt-2">
-        <span className="text-slate-500">From </span>
-        <span className="text-emerald-500 font-semibold">${price}</span>
-      </div> */}
-    </div>
-    {/* <div>
+// const ServiceProvider: React.FC<ServiceProviderProps> = ({ name, price, logo }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+//     <div className="flex items-center justify-between">
+//       <img src={`/${logo}`} alt={`${name} logo`} className="h-10" />
+//       <h3 className="text-lg font-semibold text-slate-800">{name}</h3>
+//       {/* <div className="mt-2">
+//         <span className="text-slate-500">From </span>
+//         <span className="text-emerald-500 font-semibold">${price}</span>
+//       </div> */}
+//     </div>
+//     {/* <div>
      
      
-    </div> */}
-  </div>
-);
+//     </div> */}
+//   </div>
+// );
 
 const PropertyValuation: React.FC = () => {
   const processSteps = [
@@ -46,10 +46,10 @@ const PropertyValuation: React.FC = () => {
     { icon: FileSpreadsheet, text: "Receive your detailed valuation assessment" }
   ];
 
-  const providers = [
-    { name: "Pam Golding Zimbabwe", price: "400", logo: "pam.jpg" },
-    { name: "MarketHub Real Estate", price: "300", logo: "markethub.png" }
-  ];
+  // const providers = [
+  //   { name: "Pam Golding Zimbabwe", price: "400", logo: "pam.jpg" },
+  //   { name: "MarketHub Real Estate", price: "300", logo: "markethub.png" }
+  // ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 bg-slate-50">

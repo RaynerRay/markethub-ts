@@ -3,69 +3,13 @@ import { X } from 'lucide-react';
 import { 
   Category, 
   City, 
-  ListingType,
   PropertyFilters, 
   SubCategory,
   Town
 } from '@/types/types';
 
-// Helper function to format filter values
-const formatFilterValue = (
-  key: string, 
-  value: any, 
-  categories: Category[],
-  cities: City[],
-  towns: Town[],
-  subcategories: SubCategory[]
-) => {
-  switch (key) {
-    case 'categoryId':
-      const category = categories.find(cat => cat.id === value);
-      return category?.title || value;
-    case 'subCategoryId':
-      const subCategory = subcategories.find(subcat => subcat.id === value);
-      return subCategory?.title || value;
-    
-    case 'cityId':
-      const city = cities.find(c => c.id === value);
-      return city?.title || value;
-    case 'townId':
-      // Ensure we're using strict equality comparison for finding the town
-      const town = towns.find(t => t.id === value);
-      // Add debug logging to help identify issues
-      if (!town) {
-        console.debug('Town not found:', { value, availableTowns: towns });
-      }
-      return town?.title || value;
-    
-    case 'listingType':
-      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-    
-    case 'size':
-      if (typeof value === 'object') {
-        const { min, max } = value;
-        if (min && max) return `${min} - ${max} sqm`;
-        if (min) return `Min ${min} sqm`;
-        if (max) return `Max ${max} sqm`;
-      }
-      return value;
-    
-    case 'minPrice':
-      return `Min $${Number(value).toLocaleString()}`;
-    
-    case 'maxPrice':
-      return `Max $${Number(value).toLocaleString()}`;
-    
-    case 'beds':
-      return `${value}+ beds`;
-    
-    case 'baths':
-      return `${value}+ baths`;
-    
-    default:
-      return typeof value === 'object' ? JSON.stringify(value) : String(value);
-  }
-};
+// Define a union type for possible filter value types
+type FilterValue = string | number | { min?: number; max?: number } | null;
 
 // Format filter keys to be more user-friendly
 const formatFilterKey = (key: string) => {
@@ -91,6 +35,66 @@ const formatFilterKey = (key: string) => {
   }
 };
 
+// Helper function to format filter values with type-safe parameter
+const formatFilterValue = (
+  key: string, 
+  value: FilterValue, 
+  categories: Category[],
+  cities: City[],
+  towns: Town[],
+  subcategories: SubCategory[]
+) => {
+  switch (key) {
+    case 'categoryId':
+      const category = categories.find(cat => cat.id === value);
+      return category?.title || String(value);
+    case 'subCategoryId':
+      const subCategory = subcategories.find(subcat => subcat.id === value);
+      return subCategory?.title || String(value);
+    
+    case 'cityId':
+      const city = cities.find(c => c.id === value);
+      return city?.title || String(value);
+    case 'townId':
+      const town = towns.find(t => t.id === value);
+      if (!town) {
+        console.debug('Town not found:', { value, availableTowns: towns });
+      }
+      return town?.title || String(value);
+    
+    case 'listingType':
+      return typeof value === 'string' 
+        ? value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() 
+        : String(value);
+    
+    case 'size':
+      if (typeof value === 'object' && value !== null) {
+        const { min, max } = value;
+        if (min !== undefined && max !== undefined) return `${min} - ${max} sqm`;
+        if (min !== undefined) return `Min ${min} sqm`;
+        if (max !== undefined) return `Max ${max} sqm`;
+      }
+      return String(value);
+    
+    case 'minPrice':
+      return `Min $${Number(value).toLocaleString()}`;
+    
+    case 'maxPrice':
+      return `Max $${Number(value).toLocaleString()}`;
+    
+    case 'beds':
+      return `${value}+ beds`;
+    
+    case 'baths':
+      return `${value}+ baths`;
+    
+    default:
+      return typeof value === 'object' && value !== null 
+        ? JSON.stringify(value) 
+        : String(value);
+  }
+};
+
 const ActiveFilters = ({
   filters,
   onRemoveFilter,
@@ -106,14 +110,14 @@ const ActiveFilters = ({
   subcategories: SubCategory[];
   towns: Town[]
 }) => {
-  // Add debug logging to check the towns prop
   React.useEffect(() => {
     console.debug('Towns prop:', towns);
   }, [towns]);
 
-  const activeFilters = Object.entries(filters).filter(([_, value]) => {
+  const activeFilters = Object.entries(filters).filter(([ , value]) => {
     if (value === undefined) return false;
-    if (typeof value === 'object') return Object.keys(value).length > 0;
+    if (typeof value === 'object' && value !== null) 
+      return Object.keys(value).length > 0;
     return value !== '' && value !== null;
   });
 
@@ -123,7 +127,14 @@ const ActiveFilters = ({
     <div className="flex flex-wrap gap-2 mb-4">
       {activeFilters.map(([key, value]) => {
         const formattedKey = formatFilterKey(key);
-        const formattedValue = formatFilterValue(key, value, categories, cities, subcategories, towns);
+        const formattedValue = formatFilterValue(
+          key, 
+          value as FilterValue, 
+          categories, 
+          cities, 
+          subcategories, 
+          towns
+        );
         
         return (
           <div 

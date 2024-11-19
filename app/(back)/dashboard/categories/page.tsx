@@ -3,11 +3,12 @@
 // import PanelHeader from "@/components/Dashboard/Doctor/PanelHeader";
 // import ServiceCard from "@/components/Dashboard/ServiceCard";
 // import { ScrollArea } from "@/components/ui/scroll-area";
-import { getCategories } from "@/actions/categories";
+// import { getCategories } from "@/actions/categories";
+// import { ScrollArea } from "@/components/ui/scroll-area";
 import { LayoutGrid } from "lucide-react";
 import React from "react";
 export default async function page() {
-  const categories = (await getCategories()).data || [];
+  // const categories = (await getCategories()).data || [];
   return (
     <div>
       {/* Header */}

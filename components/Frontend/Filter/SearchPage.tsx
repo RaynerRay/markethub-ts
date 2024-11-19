@@ -6,14 +6,12 @@ import { ChevronDown } from "lucide-react";
 import {
   Category,
   City,
-  Company,
   SubCategory,
   Town,
   ListingType,
   PropertyFilters,
 } from "@/types/types";
 import SideAdverts from "./SideAdverts";
-import CompaniesFilter from "./CompaniesFilter";
 import Breadcrump from "./Breadcrump";
 import PropertyCard from "../PropertyCard";
 import ActiveFilters from "./ActiveFilters";
@@ -193,7 +191,8 @@ const SearchPage: React.FC<{
       Object.entries(newFilters).forEach(([key, value]) => {
         if (value !== undefined && value !== null && value !== "") {
           if (typeof value === "object") {
-            const objValue = value as Record<string, any>;
+            const objValue = value as Record<string, unknown>;
+
             if (Object.keys(objValue).length > 0) {
               params.set(key, JSON.stringify(value));
             }

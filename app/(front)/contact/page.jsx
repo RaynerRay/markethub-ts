@@ -1,6 +1,9 @@
 import React from 'react';
-import { Home, ChevronRight, MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin, X } from 'lucide-react';
+import { Home, ChevronRight, MapPin, Mail, Phone } from 'lucide-react';
 import Link from 'next/link';
+import { SocialIcon } from 'react-social-icons/component'
+import 'react-social-icons/x'
+import 'react-social-icons/tiktok'
 
 const page = () => {
   return (
@@ -101,10 +104,20 @@ const page = () => {
                 </div>
               </form> */}
                 <div className="social-icon flex space-x-4 mt-6">
-                  <Link className="facebook" href="#"><Facebook /></Link>
-                  <Link className="x font-bold text-black" href="#"><X /></Link>
-                  <Link className="instagram" href="#"><Instagram /></Link>
-                  <Link className="linkedin" href="#"><Linkedin /></Link>
+                <SocialIcon url="https://x.com/MarketHub_Zim" target="_blank" />
+                <SocialIcon url="https://www.tiktok.com/@markethubzim" target="_blank" />
+                  {/* <Link className="facebook" href="#" target="_blank">
+                    <SocialIcon url="www.facebook.com" />
+                  </Link>
+                  <Link className="x font-bold text-black" href="https://x.com/MarketHub_Zim" target="_blank">
+                  
+                  </Link>
+                  <Link className="instagram" href="#" target="_blank">
+                  <SocialIcon url="www.instagram.com" />
+                  </Link>
+                  <Link className="tiktok" href="#" target="_blank">
+                  <SocialIcon url="www.tiktok.com" />
+                  </Link> */}
                 </div>
             </div>
           </div>

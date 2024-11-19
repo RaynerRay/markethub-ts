@@ -27,7 +27,6 @@
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import type { Session } from "next-auth";
 import React, { ReactNode } from "react";
 import { redirect } from "next/navigation";
 

@@ -3,7 +3,6 @@ import Navbar from "@/components/Frontend/Navbar";
 import NavTop from "@/components/Frontend/NavTop";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import type { Session } from "next-auth";
 import React, { ReactNode } from "react";
 
 interface LayoutProps {

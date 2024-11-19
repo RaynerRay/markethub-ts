@@ -3,22 +3,19 @@ import React, { useEffect, useState } from "react";
 import {
   MapPin,
   Bath,
-  Car,
   Square,
   Bed,
   Heart,
   Calendar,
   Building2,
   LocateFixedIcon,
-  CheckCheck,
   Check,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import PropertyCard from "./PropertyCard";
-import { Property, ListingType, User } from "@/types/types";
+import { Property, ListingType } from "@/types/types";
 import Image from "next/image";
 import {
-  toggleFavourite,
   checkIsFavourite,
   addToFavourites,
   removeFromFavourites,
@@ -61,7 +58,6 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
   property,
   similarProperties = [],
   userId,
-  text,
 }) => {
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -77,7 +73,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
 
   async function handleAddToFavourites() {
     if (userId && property?.id) {
-      const { data, status } = await addToFavourites({
+      const {  status } = await addToFavourites({
         userId,
         propertyId: property.id,
       });

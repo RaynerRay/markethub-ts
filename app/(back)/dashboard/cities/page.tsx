@@ -2,14 +2,14 @@
 // import NewButton from "@/components/Dashboard/Doctor/NewButton";
 // import PanelHeader from "@/components/Dashboard/Doctor/PanelHeader";
 // import ServiceCard from "@/components/Dashboard/ServiceCard";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { getCities } from "@/actions/cities";
+// import { ScrollArea } from "@/components/ui/scroll-area";
+// import { getCities } from "@/actions/cities";
 import NewButton from "@/components/Dashboard/NewButton";
-import PanelHeader from "@/components/Dashboard/PanelHeader";
+// import PanelHeader from "@/components/Dashboard/PanelHeader";
 import { LayoutGrid } from "lucide-react";
 import React from "react";
 export default async function page() {
-  const cities = (await getCities()).data || [];
+  // const cities = (await getCities()).data || [];
   return (
     <div>
       {/* Header */}
@@ -19,23 +19,23 @@ export default async function page() {
         {/* LIST PANNEL */}
         <div className="lg:col-span-4 col-span-full  py-3 border-r border-gray-100">
           <div className="flex items-center justify-between">
-            <PanelHeader
+            {/* <PanelHeader
               title="Cities"
               count={cities.length}
               icon={LayoutGrid}
-            />
+            /> */}
             <div className="lg:hidden">
               <NewButton title="New City" href="/dashboard/cities/new" />
             </div>
           </div>
           <div className="px-3">
-            <ScrollArea className="h-96 w-full ">
+            {/* <ScrollArea className="h-96 w-full ">
               {cities.map((city) => (
                 <div className="flex justify-center items-center gap-4">
                 <p key={city?.id}  className="font-normal text-lg"> {city.title} </p>
                 </div>
               ))}
-            </ScrollArea>
+            </ScrollArea> */}
           </div>
         </div>
 
@@ -50,10 +50,10 @@ export default async function page() {
               <LayoutGrid />
               <div className="py-3">
                 {" "}
-                <p>
+                {/* <p>
                    {cities.length.toString().padStart(2, "0")}{" "}
                   cities .
-                </p>
+                </p> */}
               </div>
               {/* <NewButton title="New Service" href="/dashboard/services/new" /> */}
             </div>

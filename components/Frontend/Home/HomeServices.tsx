@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, User, Search, FileText, TrendingUp } from 'lucide-react';
+import { Home, User,FileText, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 
 const HomeServices = () => {

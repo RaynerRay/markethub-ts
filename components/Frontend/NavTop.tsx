@@ -1,12 +1,12 @@
 'use client'
-import { useState } from 'react';
-import { Mail, Phone, ChevronDown, Heart, Calculator, Home, HomeIcon } from 'lucide-react';
+// import { useState } from 'react';
+import { Mail, Phone, HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 
 const NavTop = () => {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
-  const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
+  // const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  // const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  // const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
 
   return (
     <nav>

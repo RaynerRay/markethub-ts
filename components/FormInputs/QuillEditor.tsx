@@ -2,17 +2,20 @@
 import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+interface QuillEditorProps {
+  label: string;
+  className?: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
 export default function QuillEditor({
   label,
-  className = "w-full bg-green-500",
+  className = "w-[500px]",
   value,
   onChange,
-}: {
-  label: string;
-  className: string;
-  value: any;
-  onChange: any;
-}) {
+}: QuillEditorProps) {
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -23,6 +26,7 @@ export default function QuillEditor({
       ["clean"],
     ],
   };
+
   const formats = [
     "header",
     "bold",
@@ -38,8 +42,9 @@ export default function QuillEditor({
     "code-block",
     "color",
   ];
+
   return (
-    <div className="w-[500px]">
+    <div className={className}>
       <label
         htmlFor="content"
         className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2"

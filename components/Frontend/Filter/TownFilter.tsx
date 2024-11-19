@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState,  useCallback } from "react";
 import { Search } from "lucide-react";
 import { useClickOutside } from "@/lib/useClickOutside";
 

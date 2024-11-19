@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { X } from "lucide-react";
 import Link from "next/link";
 import { toast } from 'sonner';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -19,17 +19,12 @@ import {
 import TextInput from "../FormInputs/TextInput";
 import ImageInput from '../FormInputs/ImageInput';
 import SubmitButton from "../FormInputs/SubmitButton";
-import { BlogProps, createBlog, updateBlog } from '@/actions/blogs';
+import { createBlog, updateBlog } from '@/actions/blogs';
 import generateSlug from '@/utils/generateSlug';
 
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { blogCategories } from "@/lib/utils";
-
-const QuillEditor = dynamic(() => import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading Editor...</p>,
-});
 
 const modules = {
   toolbar: [

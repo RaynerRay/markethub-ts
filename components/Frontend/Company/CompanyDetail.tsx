@@ -1,6 +1,6 @@
 import React from 'react'; 
 import PropertyCard from '../PropertyCard';
-import { Company, Property } from '@/types/types';
+import { Company } from '@/types/types';
 import Image from 'next/image';
 
 interface CompanyDetailProps {
