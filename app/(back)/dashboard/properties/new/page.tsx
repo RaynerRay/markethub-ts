@@ -32,7 +32,7 @@ export default async function CreatePropertyPage() {
   const cities = citiesRes.data || [];
   const towns = townsRes.data || [];
   const companies = companiesRes.data || [];
-  const agents = (agentsRes.data || []).map((agent: any) => ({
+  const agents = (agentsRes.data || []).map((agent: any) => ({// eslint-disable-line @typescript-eslint/no-explicit-any
     id: agent.id,
     firstName: agent.user?.firstName || "",
     lastName: agent.user?.lastName || "",
