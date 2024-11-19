@@ -1,19 +1,33 @@
 "use server";
 
 import { prismaClient } from "@/lib/db";
+import { Blog } from "@/types/types";
 import { revalidatePath } from "next/cache";
 
-export interface BlogProps {
-  title: string;
-  slug: string;
-  imageUrl?: string;
-  description?: string;
-  content?: string;
-  categorySlug: string;
+// export interface BlogProps {
+//   title: string;
+//   slug: string;
+//   imageUrl?: string;
+//   description?: string;
+//   content?: string;
+//   categorySlug: string;
+// }
+export interface BlogsResponseMetadata {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface BlogsResponse {
+  data: Blog[] | null;
+  metadata: BlogsResponseMetadata | null;
+  status: number;
+  error: any;
 }
 
 // Create a new blog post
-export async function createBlog(data: BlogProps) {
+export async function createBlog(data: Blog) {
   try {
     const existingBlog = await prismaClient.blog.findUnique({
       where: {
@@ -51,7 +65,7 @@ export async function createBlog(data: BlogProps) {
 }
 
 // Update an existing blog post
-export async function updateBlog(id: string, data: Partial<BlogProps>) {
+export async function updateBlog(id: string, data: Partial<Blog>) {
   try {
     const existingBlog = await prismaClient.blog.findUnique({
       where: {
@@ -97,7 +111,7 @@ export async function getBlogs(params?: {
   category?: string;
   limit?: number;
   page?: number;
-}) {
+}): Promise<BlogsResponse> {
   try {
     const where: any = {};
 

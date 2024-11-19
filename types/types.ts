@@ -130,13 +130,14 @@ export type Blog = {
   id: string;
   title: string;
   slug: string;
-  imageUrl?: string;
-  description?: string;
-  content?: string;
-  categorySlug: string;
+  imageUrl?: string | null;
+  description?: string | null;
+  content?: string | null;
+  categorySlug: string | null;
   createdAt: Date;
   updatedAt: Date | null;
 };
+
 
 // Favourite Model
 export type Favourite = {
