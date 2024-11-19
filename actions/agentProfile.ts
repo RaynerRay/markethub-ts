@@ -1,5 +1,3 @@
-"use server";
-
 import { prismaClient } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
@@ -11,31 +9,26 @@ export interface AgentProfileProps {
   phone?: string;
   code?: string;
   bio?: string;
-  properties?: string[];
+  properties?: string[]; // Array of property IDs
   services?: string[];
   userId: string;
-  companyId?: string;  // Added this since it's used in the form
+  companyId?: string;
 }
 
 // Create a new agent profile
 export async function createAgentProfile(data: AgentProfileProps) {
   try {
-    const existingProfile = await prismaClient.agentProfile.findUnique({
-      where: {
-        userId: data.userId,
-      },
-    });
-
-    if (existingProfile) {
-      return {
-        data: null,
-        status: 409,
-        error: "Agent profile already exists for this user",
-      };
-    }
+    const { properties, ...rest } = data;
 
     const newProfile = await prismaClient.agentProfile.create({
-      data,
+      data: {
+        ...rest,
+        properties: properties
+          ? {
+              connect: properties.map((id) => ({ id })),
+            }
+          : undefined,
+      },
     });
     revalidatePath("/dashboard/agents");
 
@@ -54,28 +47,23 @@ export async function createAgentProfile(data: AgentProfileProps) {
   }
 }
 
+
+
 // Update an existing agent profile
 export async function updateAgentProfile(id: string, data: Partial<AgentProfileProps>) {
   try {
-    const existingProfile = await prismaClient.agentProfile.findUnique({
-      where: {
-        id,
-      },
-    });
-
-    if (!existingProfile) {
-      return {
-        data: null,
-        status: 404,
-        error: "Agent profile not found",
-      };
-    }
+    const { properties, ...rest } = data;
 
     const updatedProfile = await prismaClient.agentProfile.update({
-      where: {
-        id,
+      where: { id },
+      data: {
+        ...rest,
+        properties: properties
+          ? {
+              connect: properties.map((id) => ({ id })),
+            }
+          : undefined,
       },
-      data,
     });
     revalidatePath("/dashboard/agents");
 
@@ -93,6 +81,7 @@ export async function updateAgentProfile(id: string, data: Partial<AgentProfileP
     };
   }
 }
+
 
 // Get all agent profiles
 export async function getAgentProfiles() {

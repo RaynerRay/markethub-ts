@@ -3,13 +3,18 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { UseFormRegister, FieldErrors, FieldValues } from "react-hook-form";
+import { 
+  UseFormRegister, 
+  FieldErrors, 
+  FieldValues, 
+  Path 
+} from "react-hook-form";
 
-type TextInputProps = {
+type TextInputProps<TFieldValues extends FieldValues> = {
   label: string;
-  register: UseFormRegister<FieldValues>;
-  name: string;
-  errors: FieldErrors;
+  register: UseFormRegister<TFieldValues>;
+  name: Path<TFieldValues>;
+  errors: FieldErrors<TFieldValues>;
   type?: string;
   page?: string;
   placeholder?: string;
@@ -17,7 +22,7 @@ type TextInputProps = {
   isRequired?: boolean;
 };
 
-export default function TextInput({
+export default function TextInput<TFieldValues extends FieldValues>({
   label,
   register,
   name,
@@ -27,7 +32,7 @@ export default function TextInput({
   page,
   className = "col-span-full",
   isRequired = true,
-}: TextInputProps) {
+}: TextInputProps<TFieldValues>) {
   return (
     <div className={cn("grid gap-2", className)}>
       {type === "password" && page === "login" ? (

@@ -13,18 +13,10 @@ import React from "react";
 export default async function CreatePropertyPage() {
   const session = await getServerSession(authOptions);
 
-  // const amenityTypes = [
-  //   POOL, 
-  //   { type: AmenityType.GYM, label: "Gym" },
-  //   // ... other amenity types
-  // ];
-  
-  // Redirect if not authenticated
   if (!session?.user?.id) {
-    redirect("/login"); // or wherever you want to redirect unauthenticated users
+    redirect("/login");
   }
 
-  // Fetch all required data
   const [categoriesRes, subcategoriesRes, citiesRes, townsRes, companiesRes, agentsRes] = 
     await Promise.all([
       getCategories(),
@@ -40,8 +32,11 @@ export default async function CreatePropertyPage() {
   const cities = citiesRes.data || [];
   const towns = townsRes.data || [];
   const companies = companiesRes.data || [];
-  const agents = agentsRes.data || [];
-
+  const agents = (agentsRes.data || []).map((agent: any) => ({
+    id: agent.id,
+    firstName: agent.user?.firstName || "",
+    lastName: agent.user?.lastName || "",
+  }));
 
   return (
     <div>
