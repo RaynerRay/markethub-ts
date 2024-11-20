@@ -25,6 +25,8 @@ import generateSlug from '@/utils/generateSlug';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { blogCategories } from "@/lib/utils";
+import { BlogCreateUpdateInput } from "@/types/types";
+
 
 const modules = {
   toolbar: [
@@ -61,6 +63,7 @@ export type BlogFormData = {
 };
 
 
+
 export default function BlogForm({ title, initialData }: BlogFormProps) {
   const editingId = initialData?.id || "";
   const [isLoading, setIsLoading] = useState(false);
@@ -94,19 +97,19 @@ export default function BlogForm({ title, initialData }: BlogFormProps) {
         setIsLoading(false);
         return;
       }
-
+  
       const slug = generateSlug(data.title);
-      const blogData = {
+      const blogData: BlogCreateUpdateInput= {
         ...data,
         slug,
         imageUrl,
       };
-
+  
       if (editingId) {
-        await updateBlog(editingId, blogData);
+        await updateBlog(editingId, blogData); // Backend should accept partial data for updates
         toast.success("Blog Updated Successfully");
       } else {
-        await createBlog(blogData);
+        await createBlog(blogData); // Backend should auto-generate id, createdAt, updatedAt
         toast.success("Blog Created Successfully");
       }
       reset();
@@ -118,6 +121,7 @@ export default function BlogForm({ title, initialData }: BlogFormProps) {
       setIsLoading(false);
     }
   }
+  
 
   return (
     <div className="w-full max-w-4xl shadow-sm rounded-md m-3 border border-gray-200 mx-auto">

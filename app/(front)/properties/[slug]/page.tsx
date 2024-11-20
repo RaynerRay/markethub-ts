@@ -12,7 +12,8 @@ type PageProps = {
 };
 
 // Type guard to ensure property data matches Property type
-function isValidProperty(data: any): data is Property {
+// eslint-disable-line @typescript-eslint/no-explicit-any
+function isValidProperty(data: any): data is Property {// eslint-disable-line @typescript-eslint/no-explicit-any
   return (
     data &&
     typeof data === "object" &&
@@ -27,7 +28,7 @@ function isValidProperty(data: any): data is Property {
 }
 
 // Transform API response to match Property type
-function transformPropertyData(apiResponse: any): Property {
+function transformPropertyData(apiResponse: any): Property {// eslint-disable-line @typescript-eslint/no-explicit-any
   return {
     id: apiResponse.id,
     title: apiResponse.title || undefined,
@@ -69,7 +70,7 @@ function transformPropertyData(apiResponse: any): Property {
 }
 
 // Transform array of properties
-function transformPropertyArray(apiResponses: any[]): Property[] {
+function transformPropertyArray(apiResponses: any[]): Property[] {// eslint-disable-line @typescript-eslint/no-explicit-any
   return apiResponses
     .map(transformPropertyData)
     .filter(isValidProperty);

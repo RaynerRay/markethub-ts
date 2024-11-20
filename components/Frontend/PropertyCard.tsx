@@ -22,13 +22,20 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
       <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
         {/* Image Container */}
         <div className="relative">
-          <Image 
-          height={500}
-          width={500}
-            src={property.imageUrl} 
-            alt={property.title}
-            className="w-full h-[250px] object-cover"
-          />
+        {property.imageUrl ? (
+  <Image 
+    height={500}
+    width={500}
+    src={property.imageUrl} 
+    alt={property.title || "Property Image"}
+    className="w-full h-[250px] object-cover"
+  />
+) : (
+  <div className="w-full h-[250px] bg-gray-200 flex items-center justify-center">
+    <span className="text-gray-500">No Image Available</span>
+  </div>
+)}
+
           <span className="absolute top-4 left-4 bg-emerald-500 text-white px-3 py-1 rounded-md">
             {property.listingType}
           </span>

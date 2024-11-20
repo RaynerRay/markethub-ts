@@ -4,14 +4,16 @@ import { prismaClient } from "@/lib/db";
 import { Blog } from "@/types/types";
 import { revalidatePath } from "next/cache";
 
-// export interface BlogProps {
-//   title: string;
-//   slug: string;
-//   imageUrl?: string;
-//   description?: string;
-//   content?: string;
-//   categorySlug: string;
-// }
+export type BlogCreateUpdateInput = {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  categorySlug: string;
+  category: string;
+  imageUrl?: string;
+};
+
 export interface BlogsResponseMetadata {
   total: number;
   page: number;
@@ -27,7 +29,7 @@ export interface BlogsResponse {
 }
 
 // Create a new blog post
-export async function createBlog(data: Blog) {
+export async function createBlog(data: BlogCreateUpdateInput) {
   try {
     const existingBlog = await prismaClient.blog.findUnique({
       where: {

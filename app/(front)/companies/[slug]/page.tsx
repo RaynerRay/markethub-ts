@@ -9,7 +9,7 @@ type PageProps = {
 };
 
 // Type guard to ensure company data matches Company type
-function isValidCompany(data: any): data is Company {
+function isValidCompany(data: any): data is Company {// eslint-disable-line @typescript-eslint/no-explicit-any
   return (
     data &&
     typeof data === "object" &&
@@ -23,7 +23,7 @@ function isValidCompany(data: any): data is Company {
 }
 
 // Transform API response to match Company type
-function transformCompanyData(apiResponse: any): Company {
+function transformCompanyData(apiResponse: any): Company {// eslint-disable-line @typescript-eslint/no-explicit-any
   return {
     id: apiResponse.id,
     title: apiResponse.title,
@@ -36,7 +36,7 @@ function transformCompanyData(apiResponse: any): Company {
     address: apiResponse.address || null,
     address2: apiResponse.address2 || null,
     website: apiResponse.website || null,
-    properties: apiResponse.properties.map((p: any) => ({ id: p.id })),
+    properties: apiResponse.properties.map((p: any) => ({ id: p.id })),// eslint-disable-line @typescript-eslint/no-explicit-any
     agents: apiResponse.agents || [],
     _count: apiResponse._count || { properties: 0 },
     createdAt: new Date(apiResponse.createdAt),

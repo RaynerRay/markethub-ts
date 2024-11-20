@@ -472,4 +472,14 @@ export interface PropertyFilters {
   sortOrder?: 'asc' | 'desc';
 }
 
+export type BlogCreateUpdateInput = {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  categorySlug: string;
+  category: string;
+  imageUrl?: string;
+};
+
 

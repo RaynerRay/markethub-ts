@@ -34,7 +34,9 @@ const PropertyGrid: React.FC<PropertyCardProps> = ({ properties }) => (
           id: property.id,
           type: property.listingType,
           category: property.category?.title || "",
-          price: property.listingType === "RENT" ? property.rentPrice : property.salePrice,
+          price: property.listingType === "RENT" 
+            ? property.rentPrice ?? 0 // Default to 0 if rentPrice is undefined
+            : property.salePrice ?? 0, // Default to 0 if salePrice is undefined
           title: property.title,
           address: property.address || "",
           sqft: property.size || 0,
@@ -47,6 +49,7 @@ const PropertyGrid: React.FC<PropertyCardProps> = ({ properties }) => (
     ))}
   </div>
 );
+
 
 const PropertyListing = async () => {
   const { data: featuredProperties = [] } = await getFeaturedProperties() as { data: Property[] };
