@@ -14,7 +14,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import PropertyCard from "./PropertyCard";
 import { Property } from "@/types/types";
-import { ListingType } from '@prisma/client';
 import Image from "next/image";
 import {
   checkIsFavourite,
@@ -33,8 +32,8 @@ import BondCalculator from "./BondCalculator";
 interface PropertyDetailProps {
   property: Property | null;
   similarProperties: Property[] | null;
-  userId: string | null;
-  text: string;
+  userId: string | null | undefined;  // Updated to allow undefined
+  text?: string;  // Made optiona
 }
 
 const responsive = {

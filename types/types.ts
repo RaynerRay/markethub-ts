@@ -471,3 +471,5 @@ export interface PropertyFilters {
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
 }
+
+
