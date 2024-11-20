@@ -1,6 +1,7 @@
 "use server";
 
 import { prismaClient } from "@/lib/db";
+import { Company } from "@/types/types";
 import { revalidatePath } from "next/cache";
 
 export interface CompanyProps {
@@ -15,6 +16,94 @@ export interface CompanyProps {
   address2?: string;
   website?: string;
 }
+// Get all companies with optional pagination and filtering
+export async function getCompanies(params?: {
+  page?: number;
+  limit?: number;
+  search?: string;
+}): Promise<{
+  data: Company[] | null;
+  metadata: { total: number; page: number; limit: number; totalPages: number } | null;
+  status: number;
+  error: any;
+}> {
+  try {
+    const where: any = {};
+
+    if (params?.search) {
+      where.OR = [
+        { title: { contains: params.search, mode: "insensitive" } },
+        { description: { contains: params.search, mode: "insensitive" } },
+      ];
+    }
+
+    const page = params?.page || 1;
+    const limit = params?.limit || 10;
+    const skip = (page - 1) * limit;
+
+    const totalCount = await prismaClient.company.count({ where });
+
+    const companies = await prismaClient.company.findMany({
+      where,
+      include: {
+        properties: {
+          select: { id: true },
+        },
+        agents: {
+          select: {
+            id: true,
+            email: true,
+            phone: true,
+            createdAt: true,
+            updatedAt: true,
+            companyId: true,
+            userId: true,
+          },
+        },
+        _count: {
+          select: { properties: true },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: limit,
+    });
+
+    const normalizedCompanies = companies.map((company) => ({
+      ...company,
+      agents: company.agents.map((agent) => ({
+        id: agent.id,
+        email: agent.email,
+        phone: agent.phone,
+        createdAt: agent.createdAt,
+        updatedAt: agent.updatedAt,
+        companyId: agent.companyId,
+        userId: agent.userId,
+      })),
+    }));
+
+    return {
+      data: normalizedCompanies,
+      metadata: {
+        total: totalCount,
+        page,
+        limit,
+        totalPages: Math.ceil(totalCount / limit),
+      },
+      status: 200,
+      error: null,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      data: null,
+      metadata: null,
+      status: 500,
+      error,
+    };
+  }
+}
+
 
 // Create a new company
 export async function createCompany(data: CompanyProps) {
@@ -96,72 +185,7 @@ export async function updateCompany(id: string, data: Partial<CompanyProps>) {
   }
 }
 
-// Get all companies with optional pagination and filtering
-export async function getCompanies(params?: {
-  page?: number;
-  limit?: number;
-  search?: string;
-}) {
-  try {
-    const where: any = {};
-    
-    if (params?.search) {
-      where.OR = [
-        { title: { contains: params.search, mode: 'insensitive' } },
-        { description: { contains: params.search, mode: 'insensitive' } },
-      ];
-    }
 
-    // Calculate pagination
-    const page = params?.page || 1;
-    const limit = params?.limit || 10;
-    const skip = (page - 1) * limit;
-
-    // Get total count for pagination
-    const totalCount = await prismaClient.company.count({ where });
-
-    const companies = await prismaClient.company.findMany({
-      where,
-      include: {
-        properties: {
-          select: {
-            id: true,
-          },
-        },
-        _count: {
-          select: {
-            properties: true,
-          },
-        },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      skip,
-      take: limit,
-    });
-
-    return {
-      data: companies,
-      metadata: {
-        total: totalCount,
-        page,
-        limit,
-        totalPages: Math.ceil(totalCount / limit),
-      },
-      status: 200,
-      error: null,
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      data: null,
-      metadata: null,
-      status: 500,
-      error,
-    };
-  }
-}
 
 // Get a single company by slug
 export async function getCompanyBySlug(slug: string) {

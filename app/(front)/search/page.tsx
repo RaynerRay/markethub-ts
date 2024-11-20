@@ -4,7 +4,13 @@ import { getAllTowns } from '@/actions/towns';
 import { getCompanies } from '@/actions/companies';
 import { getProperties } from "@/actions/properties";
 import SearchPage from "@/components/Frontend/Filter/SearchPage";
-import { PropertyFilters, ListingType } from '@/types/types';
+import { 
+  PropertyFilters, 
+  ListingType, 
+  PropertyApiResponse, 
+  SearchProperty,
+  transformPropertyData 
+} from '@/types/types';
 import { getCategories } from '@/actions/categories';
 
 export default async function Page({ 
@@ -12,25 +18,29 @@ export default async function Page({
 }: { 
   searchParams?: { [key: string]: string | string[] | undefined } 
 }) {
-  // Await `searchParams` to avoid async issues
   const resolvedSearchParams = await searchParams;
 
-  // Parse search params into PropertyFilters
   const filters: PropertyFilters = {
     listingType: resolvedSearchParams.listingType as ListingType,
     cityId: resolvedSearchParams.cityId ? String(resolvedSearchParams.cityId) : undefined,
     townId: resolvedSearchParams.townId ? String(resolvedSearchParams.townId) : undefined,
     categoryId: resolvedSearchParams.categoryId ? String(resolvedSearchParams.categoryId) : undefined,
-    subCategoryId: resolvedSearchParams.subCategoryId ? String(resolvedSearchParams.subCategoryId) : undefined, // Add this
+    subCategoryId: resolvedSearchParams.subCategoryId ? String(resolvedSearchParams.subCategoryId) : undefined,
     minPrice: resolvedSearchParams.minPrice ? Number(resolvedSearchParams.minPrice) : undefined,
     maxPrice: resolvedSearchParams.maxPrice ? Number(resolvedSearchParams.maxPrice) : undefined,
-    minBeds: resolvedSearchParams.minBeds ? Number(resolvedSearchParams.minBeds) : undefined, // Change from beds
-    maxBaths: resolvedSearchParams.maxBaths ? Number(resolvedSearchParams.maxBaths) : undefined, // Change from baths
-    minSize: resolvedSearchParams.minSize ? Number(resolvedSearchParams.minSize) : undefined, // Change from size
+    minBeds: resolvedSearchParams.minBeds ? Number(resolvedSearchParams.minBeds) : undefined,
+    maxBeds: resolvedSearchParams.maxBeds ? Number(resolvedSearchParams.maxBeds) : undefined,
+    minBaths: resolvedSearchParams.minBaths ? Number(resolvedSearchParams.minBaths) : undefined,
+    maxBaths: resolvedSearchParams.maxBaths ? Number(resolvedSearchParams.maxBaths) : undefined,
+    minSize: resolvedSearchParams.minSize ? Number(resolvedSearchParams.minSize) : undefined,
+    maxSize: resolvedSearchParams.maxSize ? Number(resolvedSearchParams.maxSize) : undefined,
+    page: resolvedSearchParams.page ? Number(resolvedSearchParams.page) : 1,
+    limit: resolvedSearchParams.limit ? Number(resolvedSearchParams.limit) : 10,
+    sortBy: resolvedSearchParams.sortBy as string | undefined,
+    sortOrder: resolvedSearchParams.sortOrder as 'asc' | 'desc' | undefined,
   };
 
   try {
-    // Fetch all required data in parallel
     const [
       categoriesRes,
       subcategoriesRes,
@@ -47,7 +57,6 @@ export default async function Page({
       getProperties(filters)
     ]);
 
-    // Handle potential null responses
     if (!categoriesRes?.data ||
         !subcategoriesRes?.data ||
         !citiesRes?.data ||
@@ -56,7 +65,10 @@ export default async function Page({
         !propertiesRes) {
       throw new Error('Failed to fetch required data');
     }
-    console.log(propertiesRes)
+
+    // Transform the properties data to match the expected format
+    const transformedProperties: SearchProperty[] = (propertiesRes as PropertyApiResponse[])
+      .map(transformPropertyData);
 
     return (
       <SearchPage
@@ -64,8 +76,7 @@ export default async function Page({
         subcategories={subcategoriesRes.data}
         cities={citiesRes.data}
         towns={townsRes.data}
-        // companies={companiesRes.data}
-        properties={propertiesRes}
+        properties={transformedProperties}
         initialFilters={filters}
       />
     );

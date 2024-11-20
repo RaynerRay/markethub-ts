@@ -228,17 +228,17 @@ model Company {
   id          String         @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   slug        String         @unique
-  imageUrl    String?
-  description String?
-  email       String?
-  phone       String?
-  phone2      String?
-  address     String?
-  address2    String?
-  website     String?
-  properties  Property[]     // One-to-many with properties
-  agents      AgentProfile[] // One-to-many with agents
-
+  imageUrl    String?        // Matches TypeScript's string | null
+  description String?        // Matches TypeScript's string | null
+  email       String?        // Matches TypeScript's string | null
+  phone       String?        // Matches TypeScript's string | null
+  phone2      String?        // Matches TypeScript's string | null
+  address     String?        // Matches TypeScript's string | null
+  address2    String?        // Matches TypeScript's string | null
+  website     String?        // Matches TypeScript's string | null
+  properties  Property[]     // Matches TypeScript's Property[]
+  agents      AgentProfile[] // Matches TypeScript's AgentProfile[]
   createdAt   DateTime       @default(now())
   updatedAt   DateTime?      @updatedAt
 }
+

@@ -13,7 +13,8 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import PropertyCard from "./PropertyCard";
-import { Property, ListingType } from "@/types/types";
+import { Property } from "@/types/types";
+import { ListingType } from '@prisma/client';
 import Image from "next/image";
 import {
   checkIsFavourite,
@@ -62,45 +63,79 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
   const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
-    if (userId && property?.id) {
-      async function fetchFavouriteStatus() {
+    async function fetchFavouriteStatus() {
+      if (!userId || !property?.id) return;
+      
+      try {
         const { data } = await checkIsFavourite(userId, property.id);
         setIsFavourite(data);
+      } catch (error) {
+        console.error("Error checking favourite status:", error);
+        toast.error("Error checking favourite status");
       }
-      fetchFavouriteStatus();
     }
+
+    fetchFavouriteStatus();
   }, [userId, property?.id]);
 
   async function handleAddToFavourites() {
-    if (userId && property?.id) {
-      const {  status } = await addToFavourites({
-        userId,
+    if (!userId) {
+      toast.error("Please log in to add favorites");
+      return;
+    }
+
+    if (!property?.id) {
+      toast.error("Invalid property");
+      return;
+    }
+
+    try {
+      const { status } = await addToFavourites({
+        userId: userId,
         propertyId: property.id,
       });
+      
       if (status === 200) {
         setIsFavourite(true);
         toast.success("Property added to favorites");
       } else {
         toast.error("Error adding to favorites");
       }
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      toast.error("Error adding to favorites");
     }
   }
 
   async function handleRemoveFromFavourites() {
-    if (userId && property?.id) {
+    if (!userId) {
+      toast.error("Please log in to manage favorites");
+      return;
+    }
+
+    if (!property?.id) {
+      toast.error("Invalid property");
+      return;
+    }
+
+    try {
       const { status } = await removeFromFavourites(userId, property.id);
+      
       if (status === 200) {
         setIsFavourite(false);
         toast.success("Property removed from favorites");
       } else {
         toast.error("Error removing from favorites");
       }
+    } catch (error) {
+      console.error("Error removing from favorites:", error);
+      toast.error("Error removing from favorites");
     }
   }
 
   const renderPrice = () => {
     if (!property) return "N/A";
-    if (property.listingType === ListingType.RENT && property.rentPrice) {
+    if (property.listingType === "RENT" && property.rentPrice) {
       return `$${property.rentPrice.toLocaleString()} per month`;
     }
     return property.salePrice
@@ -113,6 +148,8 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
   const sanitizedDescription = property?.description
     ? DOMPurify.sanitize(property.description)
     : "Description not available";
+
+
 
   return (
     <section className="py-12 md:py-10 bg-gray-50">
