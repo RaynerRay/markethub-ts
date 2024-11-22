@@ -63,7 +63,7 @@ const PropertyListing = async () => {
   );
 
   return (
-    <div className="container max-w-7xl mx-auto py-12 space-y-16">
+    <div className="container max-w-7xl mx-auto py-12 space-y-16 ">
       {/* Properties for Sale Section */}
       <section>
         <SectionHeader

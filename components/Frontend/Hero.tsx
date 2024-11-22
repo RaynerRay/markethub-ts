@@ -34,7 +34,7 @@ const Hero = async () => {
               <span className="text-navy-900 block md:inline"> To Live With Your Family</span>
             </h1>
             <p className="text-gray-600 mt-4 md:mt-6 mb-6 md:mb-8 text-sm sm:text-base">
-              Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.
+            Discover a wide range of properties across Zimbabwe. Our platform simplifies your home search, connecting you with verified listings and reliable agents.
             </p>
             {/* <button className="bg-emerald-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md w-fit mx-auto md:mx-0 hover:bg-emerald-600 transition-colors">
               Get Started

@@ -8,11 +8,11 @@
 forms 
 Agents
 
-## SearchFilters
-Towns
 
 ## SearchPage
 adverts, side view
 
 
 ## Trends
+
+## SEO
