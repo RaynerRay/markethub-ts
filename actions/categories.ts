@@ -90,6 +90,13 @@ export async function createManyCategories() {
   try {
     const categories = [
       { title: "Houses", slug: "houses" },
+  { title: "Flats & Apartments", slug: "flats-and-apartments" },
+  { title: "Commercial Properties", slug: "commercial-properties" },
+  { title: "Land", slug: "land" },
+  { title: "Student Accomodation", slug: "student-accomodation" },
+  { title: "Rooms", slug: "rooms" },
+  { title: "Hotels & Lodges", slug: "hotels-and-lodges" },
+  { title: "Warehouses & Factories", slug: "warehouses-and-factories" },
    
     ];
 

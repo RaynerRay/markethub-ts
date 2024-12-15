@@ -62,6 +62,14 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
 }) => {
   const [isFavourite, setIsFavourite] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [sanitizedDescription, setSanitizedDescription] = useState<string>("");
+
+  // Effect to sanitize description
+  useEffect(() => {
+    if (property?.description) {
+      setSanitizedDescription(DOMPurify.sanitize(property.description));
+    }
+  }, [property?.description]);
 
   useEffect(() => {
     async function fetchFavouriteStatus() {
@@ -133,9 +141,9 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
       : "Price on request";
   };
 
-  const sanitizedDescription = property?.description
-    ? DOMPurify.sanitize(property.description)
-    : "Description not available";
+  // const sanitizedDescription = property?.description
+  //   ? DOMPurify.sanitize(property.description)
+  //   : "Description not available";
 
   // SEO metadata
   const propertyTitle = property?.title || "Property Listing";
@@ -258,24 +266,24 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({
 
                 {/* Description */}
                 <div
-                  className={`text-slate-600 text-lg leading-relaxed bg-white border-2 border-gray-100 rounded-lg p-4 overflow-hidden transition-all duration-300 ${
-                    expanded ? "max-h-full" : "max-h-[240px]"
-                  }`}
+                className={`text-slate-600 text-lg leading-relaxed bg-white border-2 border-gray-100 rounded-lg p-4 overflow-hidden transition-all duration-300 ${
+                  expanded ? "max-h-full" : "max-h-[240px]"
+                }`}
+              >
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizedDescription,
+                  }}
+                />
+              </div>
+              {property?.description && property.description.length > 240 && (
+                <button
+                  onClick={() => setExpanded((prev) => !prev)}
+                  className="mt-1 text-emerald-500 hover:underline focus:outline-none"
                 >
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: sanitizedDescription,
-                    }}
-                  />
-                </div>
-                {property?.description && property.description.length > 240 && (
-                  <button
-                    onClick={() => setExpanded((prev) => !prev)}
-                    className="mt-1 text-emerald-500 hover:underline focus:outline-none"
-                  >
-                    {expanded ? "Read Less" : "Read More"}
-                  </button>
-                )}
+                  {expanded ? "Read Less" : "Read More"}
+                </button>
+              )}
 
                 {/* Property details grid */}
                 <PropertyDetailsGrid property={property} />
@@ -459,7 +467,7 @@ const PropertyDetailsGrid = ({ property }: { property: Property | null }) => (
         <span className="text-gray-600 text-sm">
           Listing Date:{" "}
           <span className="font-bold ml-2">
-            {property?.createdAt ? new Date(property.createdAt).toLocaleDateString() : "N/A"}
+            {property?.createdAt ? new Date().toISOString().slice(0, 10).replace(/-/g, '/') : "N/A"}
           </span>
         </span>
       </div>

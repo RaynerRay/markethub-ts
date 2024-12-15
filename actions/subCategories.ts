@@ -119,10 +119,10 @@ export async function createManySubCategories(categoryId: string) {
     const subcategories = [
      
     
-      { title: "Townhouses & Complexes", slug: "townhouses-complexes", categoryId },
-      { title: "Cottages", slug: "cottages", categoryId },
-      { title: "Detached Houses", slug: "detached-houses",categoryId },
-      { title: "Semi-Detached Houses", slug: "semi-detached-houses", categoryId },
+      { title: "Stands & Residential Land", slug: "stands-and-residential-land", categoryId },
+      { title: "Farms & Agricultural Land ", slug: "farms-and-agricultural-land", categoryId },
+      { title: "Commercial & Industrial Land  ", slug: "commercial-and-industrial-land", categoryId },
+
     ];
 
     for (const subcategory of subcategories) {

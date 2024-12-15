@@ -11,6 +11,9 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://markethub.co.zw'), // Replace with your actual domain
+  icons: {
+    icon: "/favicon.png",
+  },
   title: {
     default: "MarketHub Zimbabwe | Premier Real Estate Marketplace",
     template: "%s | MarketHub Zimbabwe"
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
     description: "Zimbabwe's leading real estate marketplace. Find properties for sale and rent in Harare, Bulawayo, Mutare and across Zimbabwe.",
     images: [
       {
-        url: "/logo.png",
+        url: "/favicon.png",
         width: 1200,
         height: 630,
         alt: "MarketHub Zimbabwe Real Estate Marketplace",

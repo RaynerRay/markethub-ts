@@ -2,8 +2,6 @@
 
 ## fix all updates in dashboard
 
-## fix blogg detail
-
 
 forms 
 Agents
