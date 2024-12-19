@@ -65,7 +65,7 @@ const CompanyDetail: React.FC<CompanyDetailProps> = ({ company }) => {
 
       {/* Property List */}
       <div>
-        <h3 className="text-2xl font-semibold text-navy-900 mb-6">Company Properties</h3>
+        <h3 className="text-2xl font-semibold text-navy-900 mb-6">Properties by {company.title}</h3>
         {company.properties && company.properties.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {company.properties.map((property) => (

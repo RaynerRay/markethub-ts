@@ -6,7 +6,7 @@ export default function LogoClouds() {
     { src: "/seef.jpg", link: "seef-zimbabwe" },
     { src: "/pam.jpg", link: "pam-golding" },
     { src: "/kennan.jpg", link: "kennan-properties" },
-    { src: "/royal.jpg", link: "royal-properties" },
+    { src: "/oasis-logo.png", link: "oasis-realty" },
     { src: "/cardinal.jpg", link: "cardinal-properties" },
   ];
 

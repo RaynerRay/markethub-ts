@@ -23,7 +23,7 @@ function isValidCompany(data: any): data is Company {// eslint-disable-line @typ
 }
 
 // Transform API response to match Company type
-function transformCompanyData(apiResponse: any): Company {// eslint-disable-line @typescript-eslint/no-explicit-any
+function transformCompanyData(apiResponse: any): Company {
   return {
     id: apiResponse.id,
     title: apiResponse.title,
@@ -36,7 +36,20 @@ function transformCompanyData(apiResponse: any): Company {// eslint-disable-line
     address: apiResponse.address || null,
     address2: apiResponse.address2 || null,
     website: apiResponse.website || null,
-    properties: apiResponse.properties.map((p: any) => ({ id: p.id })),// eslint-disable-line @typescript-eslint/no-explicit-any
+    properties: apiResponse.properties.map((p: any) => ({
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      listingType: p.listingType,
+      category: p.category,
+      salePrice: p.salePrice,
+      rentPrice: p.rentPrice,
+      imageUrl: p.imageUrl,
+      address: p.address,
+      size: p.size,
+      beds: p.beds,
+      baths: p.baths
+    })),
     agents: apiResponse.agents || [],
     _count: apiResponse._count || { properties: 0 },
     createdAt: new Date(apiResponse.createdAt),
